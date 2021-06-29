@@ -1,0 +1,18 @@
+# vim: set ft=yaml ts=2 expandtab:
+---
+
+- name: verify
+  hosts: all,!infrastructure_group
+
+  tasks:
+
+  - name: get list of installed packages
+    package_facts:
+
+  - name: assertions
+    assert:
+      that:
+      - "'setroubleshoot-server' in ansible_facts.packages"
+      - "not 'setroubleshoot' in ansible_facts.packages"
+
+...
