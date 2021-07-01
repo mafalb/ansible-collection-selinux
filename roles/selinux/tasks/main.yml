@@ -1,0 +1,19 @@
+# vim: set ft=yaml ts=2 expandtab:
+---
+
+- name: assertions
+  assert:
+    that:
+    - state in [ 'disabled', 'enforcing', 'permissive' ]
+
+- name: selinux-policy is present
+  package:
+    name: "{{ packages }}"
+
+- name: include_tasks for state
+  include_tasks: "{{ state }}.yml"
+
+- name: debug 
+  debug: var=_selinux_return_values
+
+...

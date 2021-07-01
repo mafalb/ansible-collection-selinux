@@ -10,6 +10,9 @@
 
   roles:
 
+  # we can not test in containers
+  #
+  - role: mafalb.selinux.selinux
   - role: mafalb.selinux.setroubleshootd
   - role: mafalb.selinux.setroubleshoot
     state: absent

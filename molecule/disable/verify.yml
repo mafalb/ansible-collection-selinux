@@ -1,0 +1,21 @@
+# vim: set ft=yaml ts=2 expandtab:
+---
+
+- name: verify
+  hosts: all,!infrastructure_group
+
+  tasks:
+  
+  - name: get selinux status
+    selinux:
+      state: disabled
+    check_mode: true
+    register: _res
+
+  - name: assertions
+    assert:
+      that:
+      - not_res.changed|bool
+      - not _res.reboot_required|bool
+  
+...
