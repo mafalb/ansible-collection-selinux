@@ -4,6 +4,7 @@
 - name: selinux is disabled
   selinux:
     state: "{{ state }}"
+  register: _selinux_return_values
   notify: reboot
 
 ...
