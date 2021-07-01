@@ -10,6 +10,8 @@
 
   roles:
 
+  - role: mafalb.ansible.node
+    ansible_node_features: selinux
   - role: mafalb.selinux.selinux
   - role: mafalb.selinux.setroubleshootd
   - role: mafalb.selinux.setroubleshoot
