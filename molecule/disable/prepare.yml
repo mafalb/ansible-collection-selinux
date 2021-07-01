@@ -19,6 +19,11 @@
 
 - name: enable selinux
   hosts: all,!infrastructure_group
+
+  environment:
+    http_proxy: http://ci-proxy:3128
+    https_proxy: http://ci-proxy:3128
+
   roles:
   - role: mafalb.selinux.selinux
 
