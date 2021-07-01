@@ -13,5 +13,7 @@
   - role: mafalb.selinux.setroubleshootd
   - role: mafalb.selinux.setroubleshoot
     state: absent
+  - role: mafalb.selinux.mcstrans
+    state: absent
 
 ...

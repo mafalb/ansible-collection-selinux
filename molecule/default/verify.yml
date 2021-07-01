@@ -14,5 +14,6 @@
       that:
       - "'setroubleshoot-server' in ansible_facts.packages"
       - "not 'setroubleshoot' in ansible_facts.packages"
+      - "not 'mcstrans' in ansible_facts.packages"
 
 ...

@@ -12,8 +12,6 @@
   - name: assertions
     assert:
       that:
-      - "'setroubleshoot-server' in ansible_facts.packages"
-      - "'setroubleshoot' in ansible_facts.packages"
-      - "not 'mcstrans' in ansible_facts.packages"
+      - "'mcstrans' in ansible_facts.packages"
 
 ...

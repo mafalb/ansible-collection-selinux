@@ -10,10 +10,6 @@
 
   roles:
 
-  - role: mafalb.selinux.setroubleshootd
-  - role: mafalb.selinux.setroubleshoot
   - role: mafalb.selinux.mcstrans
-    state: absent
-    
 
 ...
