@@ -11,7 +11,11 @@ Ansible collection mafalb.selinux
 
 ## Roles
 
-### [mafalb.selinux.roleX](roles/roleX }}/README.md)
+### [mafalb.selinux.setroubleshoot](roles/setroubleshoot/README.md)
+
+### [mafalb.selinux.setroubleshootd](roles/setroubleshootd/README.md)
+
+### [mafalb.selinux.mcstrans](roles/mcstrans/README.md)
 
 ## License
 
