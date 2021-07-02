@@ -15,7 +15,7 @@
   - name: assertions
     assert:
       that:
-      - not_res.changed|bool
+      - not _res.changed|bool
       - not _res.reboot_required|bool
   
 ...
