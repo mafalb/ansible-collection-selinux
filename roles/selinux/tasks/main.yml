@@ -8,7 +8,7 @@
 
 - name: selinux-policy is present
   package:
-    name: "{{ packages }}"
+    name: "{{ packages + [ 'selinux-policy-' + policy ] }}"
 
 - name: include_tasks for state
   include_tasks: "{{ state }}.yml"
