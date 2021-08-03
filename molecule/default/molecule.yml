@@ -44,7 +44,7 @@ platforms:
   - ci
 
 - name: ci-proxy
-  image: quay.io/centos/centos:8
+  image: quay.io/rockylinux/rockylinux:8
   command: /lib/systemd/systemd
   network_mode: bridge
   networks:
