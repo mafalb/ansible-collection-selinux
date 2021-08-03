@@ -1,0 +1,26 @@
+# vim: set ft=yaml ts=2 expandtab:
+---
+
+- name: assertions
+  assert:
+    that:
+    - state in [ 'disabled', 'enforcing', 'permissive' ]
+
+- name: get OS specific variables
+  with_first_found:
+  - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+  - "{{ ansible_os_family }}.yml"
+  include_vars:
+    file: "{{ item }}"
+
+- name: selinux-policy is present
+  package:
+    name: "{{ packages + [ 'selinux-policy-' + policy ] }}"
+
+- name: include_tasks for state
+  include_tasks: "{{ state }}.yml"
+
+- name: debug 
+  debug: var=_selinux_return_values
+
+...

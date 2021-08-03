@@ -1,0 +1,10 @@
+# vim: set ft=yaml ts=2 expandtab:
+---
+
+- name: reboot
+  reboot:
+  when:
+  - _selinux_return_values.reboot_required|bool
+  - not ansible_virtualization_type in ['lxc','docker','containerd','container']
+
+...

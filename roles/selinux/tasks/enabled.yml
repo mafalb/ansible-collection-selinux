@@ -1,0 +1,11 @@
+# vim: set ft=yaml ts=2 expandtab:
+---
+
+- name: selinux is enabled
+  selinux:
+    state: "{{ state }}"
+    policy: "{{ policy }}"
+  register: _selinux_return_values
+  notify: reboot
+
+...
