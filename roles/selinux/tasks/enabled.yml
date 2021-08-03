@@ -7,4 +7,5 @@
     policy: "{{ policy }}"
   register: _selinux_return_values
   notify: reboot
+
 ...
