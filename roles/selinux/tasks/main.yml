@@ -6,6 +6,13 @@
     that:
     - state in [ 'disabled', 'enforcing', 'permissive' ]
 
+- name: get OS specific variables
+  with_first_found:
+  - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+  - "{{ ansible_os_family }}.yml"
+  include_vars:
+    file: "{{ item }}"
+
 - name: selinux-policy is present
   package:
     name: "{{ packages + [ 'selinux-policy-' + policy ] }}"
