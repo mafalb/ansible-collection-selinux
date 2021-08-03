@@ -43,44 +43,33 @@ jobs:
         include:
 
         - target: fedora33
-          distribution: fedora
-          version: 33
+          image: docker.io/fedora:33
+          privileged: true
 
         - target: fedora34
-          distribution: fedora
-          version: 34
+          image: docker.io/fedora:34
+          privileged: true
 
         - target: c8s
-          distribution: centos
-          registry: "quay.io/centos/"
-          version: stream8
+          image: quay.io/centos/centos:stream8
 
         - target: alma8
-          distribution: almalinux
-          registry: "docker.io/almalinux/"
-          version: 8
-          test_molecule: true
-          test_controlnode: true
+          image: quay.io/almalinux/almalinux:8
 
         - target: rocky8
-          distribution: rockylinux
-          registry: "quay.io/rockylinux/"
-          tag: '8'
+          image: quay.io/rockylinux/rockylinux:8
 
         - target: centos7
-          distribution: centos
-          version: 7
+          image: quay.io/centos/centos:7
 
         - target: centos8
-          distribution: centos
-          version: 8
+          image: quay.io/centos/centos:8
 
     env:
       
       ANSIBLE_VERSION: ${{ matrix.ansible_version }}
-      CI_REGISTRY: ${{ matrix.registry }}
-      CI_CONTAINER_IMAGE: ${{ matrix.distribution }}
-      CI_CONTAINER_TAG: ${{ matrix.version }}
+      CI_IMAGE: ${{ matrix.image }}
+      CI_HOSTNAME: ci-${{ matrix.target }}
       PY_COLORS: 1
       ANSIBLE_FORCE_COLOR: 1
  
@@ -95,20 +84,11 @@ jobs:
       with:
         path: ansible_collections/mafalb/selinux
 
-    # use the github actions ansible
-    #
-    - name: get mafalb.ansible
-      run: ansible-galaxy collection install mafalb.ansible
-
-    # use system ansible
-    #
     - name: install molecule
       run: |
-        sudo apt-get install ansible
-        /usr/bin/ansible-playbook -D ~/.ansible/collections/ansible_collections/mafalb/ansible/playbooks/molecule.yml -e molecule_ansible_version=${{ matrix.ansible_version }} -t all,debug
+        ansible-galaxy collection install mafalb.ansible
+        /usr/bin/ansible-playbook -e ansible_python_interpreter=python3 -D ~/.ansible/collections/ansible_collections/mafalb/ansible/playbooks/molecule.yml -e molecule_ansible_version=${{ matrix.ansible_version }} -t all,debug
 
-    # use our ansible
-    #
     - name: check ansible version
       run: |
         source ~/.virtualenvs/molecule/bin/activate
